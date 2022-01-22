@@ -43,11 +43,15 @@ class _MyHomePageState extends State<MyHomePage> {
   void _addWebsite() {
     Navigator.of(context).pop();
     setState(() {
-      _websites.add(_controllerWebsite.text);
-      _controllerWebsite.text = "";
+      if (_controllerWebstite.text.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Please enter a Website')));
+      } else {
+        _websites.add(_controllerWebstite.text);
+        _controllerWebstite.text = '';
+      }
     });
   }
-
   Future _openNewWebsiteDialog() => showDialog(
         context: context,
         builder: (context) => AlertDialog(
